@@ -46,10 +46,9 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     name: "Consent Tracking",
-    href: "#",
+    href: "/dashboard/consent-tracking",
     icon: Cookie,
-    isImplemented: false,
-    phaseLabel: "Phase 7",
+    isImplemented: true,
   },
 ];
 

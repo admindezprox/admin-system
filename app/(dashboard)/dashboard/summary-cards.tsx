@@ -70,7 +70,8 @@ export function SummaryCards({ metrics }: SummaryCardsProps) {
       subtitle: "Privacy-compliant records",
       icon: Cookie,
       accentColor: "zinc",
-      moduleNote: "Tracking in Phase 7",
+      href: "/dashboard/consent-tracking",
+      moduleNote: "Open Tracking",
     },
   ];
 
