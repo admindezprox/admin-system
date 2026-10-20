@@ -20,72 +20,72 @@ export function formatStatusBadge(status: string): StatusBadgeConfig {
     case "pending":
       return {
         label: "Pending",
-        badgeClass: "border-amber-500/30 bg-amber-500/10 text-amber-400",
-        dotClass: "bg-amber-400",
+        badgeClass: "border-amber-200 bg-amber-50 text-amber-800",
+        dotClass: "bg-amber-500",
       };
     case "new":
       return {
         label: "New",
-        badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-        dotClass: "bg-emerald-400",
+        badgeClass: "border-emerald-200 bg-emerald-50 text-emerald-800",
+        dotClass: "bg-emerald-600",
       };
     case "confirmed":
       return {
         label: "Confirmed",
-        badgeClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-        dotClass: "bg-emerald-400",
+        badgeClass: "border-emerald-200 bg-emerald-50 text-emerald-800",
+        dotClass: "bg-emerald-600",
       };
     case "contacted":
     case "in_review":
       return {
         label: normalized === "in_review" ? "In Review" : "Contacted",
-        badgeClass: "border-blue-500/30 bg-blue-500/10 text-blue-400",
-        dotClass: "bg-blue-400",
+        badgeClass: "border-blue-200 bg-blue-50 text-blue-800",
+        dotClass: "bg-blue-600",
       };
     case "discovery_scheduled":
       return {
         label: "Discovery Scheduled",
-        badgeClass: "border-cyan-500/30 bg-cyan-500/10 text-cyan-400",
-        dotClass: "bg-cyan-400",
+        badgeClass: "border-cyan-200 bg-cyan-50 text-cyan-800",
+        dotClass: "bg-cyan-600",
       };
     case "proposal_sent":
       return {
         label: "Proposal Sent",
-        badgeClass: "border-purple-500/30 bg-purple-500/10 text-purple-400",
-        dotClass: "bg-purple-400",
+        badgeClass: "border-purple-200 bg-purple-50 text-purple-800",
+        dotClass: "bg-purple-600",
       };
     case "closed_won":
       return {
         label: "Closed Won",
-        badgeClass: "border-emerald-500/40 bg-emerald-500/15 text-emerald-300",
-        dotClass: "bg-emerald-400",
+        badgeClass: "border-emerald-300 bg-emerald-100 text-emerald-900",
+        dotClass: "bg-emerald-600",
       };
     case "closed_lost":
     case "cancelled":
     case "spam":
       return {
         label: normalized.charAt(0).toUpperCase() + normalized.slice(1),
-        badgeClass: "border-red-500/30 bg-red-500/10 text-red-400",
-        dotClass: "bg-red-400",
+        badgeClass: "border-red-200 bg-red-50 text-red-800",
+        dotClass: "bg-red-500",
       };
     case "rescheduled":
       return {
         label: "Rescheduled",
-        badgeClass: "border-yellow-500/30 bg-yellow-500/10 text-yellow-400",
-        dotClass: "bg-yellow-400",
+        badgeClass: "border-yellow-200 bg-yellow-50 text-yellow-800",
+        dotClass: "bg-yellow-600",
       };
     case "completed":
     case "responded":
     case "archived":
       return {
         label: normalized.charAt(0).toUpperCase() + normalized.slice(1),
-        badgeClass: "border-zinc-700 bg-zinc-800 text-zinc-300",
-        dotClass: "bg-zinc-400",
+        badgeClass: "border-zinc-200 bg-zinc-100 text-zinc-700",
+        dotClass: "bg-zinc-500",
       };
     default:
       return {
         label: status,
-        badgeClass: "border-zinc-700 bg-zinc-800/80 text-zinc-300",
+        badgeClass: "border-zinc-200 bg-zinc-50 text-zinc-700",
         dotClass: "bg-zinc-400",
       };
   }

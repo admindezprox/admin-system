@@ -93,7 +93,7 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
       try {
         const id = window.turnstile.render(turnstileContainerRef.current, {
           sitekey: siteKey!,
-          theme: "dark",
+          theme: "auto",
           size: "normal",
           callback: (token: string) => {
             setTurnstileToken(token);
@@ -182,22 +182,22 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
         onLoad={() => setScriptLoaded(true)}
       />
 
-      <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900/80 p-8 shadow-2xl backdrop-blur-xl">
+      <div className="w-full max-w-md rounded-xl border border-zinc-200/90 bg-white p-8 shadow-sm">
         {/* Brand Header */}
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800/80 shadow-inner">
-            <ShieldCheck className="h-7 w-7 text-emerald-400" aria-hidden="true" />
+        <div className="mb-6 text-center">
+          <div className="mx-auto mb-3.5 flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-2xs">
+            <ShieldCheck className="h-6 w-6" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900">
             Dezprox Founder Access
           </h1>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-1.5 text-xs text-zinc-500">
             Sign in to access the private administrative control center.
           </p>
         </div>
 
         {/* Security notice banner */}
-        <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/10 px-3.5 py-2.5 text-xs text-amber-300">
+        <div className="mb-5 rounded-lg border border-amber-200 bg-amber-50/70 px-3 py-2 text-xs text-amber-900">
           <span className="font-semibold">Restricted System:</span> This portal is strictly restricted to authorized Dezprox founders. Public registration is not permitted.
         </div>
 
@@ -205,12 +205,12 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
         {!siteKey && (
           <div
             role="alert"
-            className="mb-6 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-950/40 p-4 text-xs text-amber-200"
+            className="mb-5 flex items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900"
           >
-            <AlertTriangle className="h-5 w-5 shrink-0 text-amber-400 mt-0.5" aria-hidden="true" />
+            <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600 mt-0.5" aria-hidden="true" />
             <div>
-              <div className="font-semibold text-amber-300">Configuration Notice</div>
-              <p className="mt-0.5 text-amber-200/80 leading-relaxed">
+              <div className="font-semibold text-amber-950">Configuration Notice</div>
+              <p className="mt-0.5 text-amber-800 leading-relaxed">
                 NEXT_PUBLIC_TURNSTILE_SITE_KEY is not defined. Please configure it in your environment.
               </p>
             </div>
@@ -222,9 +222,9 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
           <div
             role="alert"
             aria-live="assertive"
-            className="mb-6 flex items-start gap-3 rounded-lg border border-red-500/30 bg-red-950/40 p-4 text-sm text-red-200"
+            className="mb-5 flex items-start gap-2.5 rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs text-rose-800"
           >
-            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" aria-hidden="true" />
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" aria-hidden="true" />
             <div className="flex-1 font-medium leading-relaxed">{displayError}</div>
           </div>
         )}
@@ -234,16 +234,16 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
           <div
             role="status"
             aria-live="polite"
-            className="mb-6 flex items-center gap-3 rounded-lg border border-emerald-500/30 bg-emerald-950/40 p-4 text-sm text-emerald-200"
+            className="mb-5 flex items-center gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-800"
           >
-            <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" aria-hidden="true" />
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
             <div className="flex-1 font-medium">
               Founder credentials verified. Directing to dashboard...
             </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="hidden"
             name="next"
@@ -264,11 +264,11 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
           <div>
             <label
               htmlFor="email"
-              className="block text-xs font-semibold uppercase tracking-wider text-zinc-300"
+              className="block text-xs font-semibold uppercase tracking-wider text-zinc-500"
             >
               Founder Email
             </label>
-            <div className="mt-2">
+            <div className="mt-1.5">
               <input
                 id="email"
                 name="email"
@@ -278,7 +278,7 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
                 enterKeyHint="next"
                 disabled={isPending || state.success}
                 aria-describedby={displayError ? "form-error" : undefined}
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-950/70 px-4 py-3 text-sm text-zinc-100 placeholder-zinc-500 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-60"
+                className="w-full rounded-lg border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 placeholder-zinc-400 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-60"
                 placeholder="founder@dezprox.com"
               />
             </div>
@@ -289,12 +289,12 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-xs font-semibold uppercase tracking-wider text-zinc-300"
+                className="block text-xs font-semibold uppercase tracking-wider text-zinc-500"
               >
                 Password
               </label>
             </div>
-            <div className="relative mt-2">
+            <div className="relative mt-1.5">
               <input
                 id="password"
                 name="password"
@@ -304,7 +304,7 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
                 enterKeyHint="done"
                 disabled={isPending || state.success}
                 aria-describedby={displayError ? "form-error" : undefined}
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-950/70 py-3 pr-11 pl-4 text-sm text-zinc-100 placeholder-zinc-500 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-60"
+                className="w-full rounded-lg border border-zinc-200 bg-white py-2.5 pr-10 pl-3.5 text-xs text-zinc-900 placeholder-zinc-400 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-60"
                 placeholder="••••••••••••"
               />
               <button
@@ -313,37 +313,37 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
                 disabled={isPending || state.success}
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-zinc-400 hover:text-zinc-200 focus:outline-none disabled:opacity-50"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-zinc-400 hover:text-zinc-600 focus:outline-none disabled:opacity-50 cursor-pointer"
               >
                 {showPassword ? (
-                  <EyeOff className="h-5 w-5" aria-hidden="true" />
+                  <EyeOff className="h-4 w-4" aria-hidden="true" />
                 ) : (
-                  <Eye className="h-5 w-5" aria-hidden="true" />
+                  <Eye className="h-4 w-4" aria-hidden="true" />
                 )}
               </button>
             </div>
           </div>
 
           {/* Cloudflare Turnstile Bot Protection Widget */}
-          <div className="flex flex-col items-center justify-center pt-2">
+          <div className="flex flex-col items-center justify-center pt-1">
             <div
               ref={turnstileContainerRef}
               className="min-h-[65px] flex items-center justify-center"
               aria-label="Cloudflare Turnstile Bot Verification Challenge"
             />
             {turnstileError && (
-              <p className="mt-2 text-xs font-medium text-amber-400 text-center" role="alert">
+              <p className="mt-1.5 text-xs font-medium text-amber-700 text-center" role="alert">
                 {turnstileError}
               </p>
             )}
           </div>
 
           {/* Submit Button */}
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
               disabled={isPending || state.success || !siteKey}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-950/40 transition hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-zinc-900 disabled:cursor-not-allowed disabled:opacity-70"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-xs transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
             >
               {isPending ? (
                 <>
@@ -366,7 +366,7 @@ export function LoginForm({ initialNext, initialError }: LoginFormProps) {
         </form>
 
         {/* Security info footer */}
-        <div className="mt-8 border-t border-zinc-800/80 pt-6 text-center text-xs text-zinc-500">
+        <div className="mt-6 border-t border-zinc-100 pt-4 text-center text-[11px] text-zinc-400">
           Protected by Cloudflare Turnstile and authoritative founder profile verification.
         </div>
       </div>

@@ -82,16 +82,16 @@ export function RecentActivity({
   ];
 
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl backdrop-blur-xs">
+    <div className="rounded-xl border border-zinc-200/80 bg-white shadow-xs">
       {/* Header and Filter Tabs */}
-      <div className="border-b border-zinc-800/80 p-5 sm:p-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-b border-zinc-100 p-5 sm:p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <Layers className="h-5 w-5 text-emerald-400" aria-hidden="true" />
-              <h2 className="text-lg font-bold text-white">Recent Activity & Submissions</h2>
+              <Layers className="h-4 w-4 text-emerald-700" aria-hidden="true" />
+              <h2 className="text-base font-bold text-zinc-900">Recent Activity & Submissions</h2>
             </div>
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs text-zinc-500">
               Real-time records from public website submissions across all enquiry channels.
             </p>
           </div>
@@ -100,7 +100,7 @@ export function RecentActivity({
           <div
             role="tablist"
             aria-label="Activity Categories"
-            className="flex items-center gap-1 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950/70 p-1"
+            className="flex items-center gap-1 overflow-x-auto scrollbar-none rounded-lg border border-zinc-200 bg-zinc-50 p-1 sm:overflow-visible"
           >
             {tabs.map((tab) => {
               const isSelected = activeTab === tab.id;
@@ -110,23 +110,23 @@ export function RecentActivity({
                   role="tab"
                   aria-selected={isSelected}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-emerald-400 ${
+                  className={`flex shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all focus:outline-none focus:ring-1 focus:ring-emerald-500 cursor-pointer ${
                     isSelected
-                      ? "bg-zinc-800 text-white shadow-xs font-semibold"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      ? "bg-white text-zinc-900 shadow-2xs font-semibold border border-zinc-200/80"
+                      : "text-zinc-500 hover:text-zinc-900 border border-transparent"
                   }`}
                 >
                   <span>{tab.label}</span>
                   {tab.hasError ? (
-                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-950 text-[10px] text-red-400 font-bold" title="Query error">
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-rose-100 text-[10px] text-rose-700 font-bold" title="Query error">
                       !
                     </span>
                   ) : (
                     <span
                       className={`rounded-full px-1.5 py-0.2 text-[10px] ${
                         isSelected
-                          ? "bg-emerald-500/20 text-emerald-300 font-semibold"
-                          : "bg-zinc-800/80 text-zinc-400"
+                          ? "bg-emerald-50 text-emerald-800 font-semibold"
+                          : "bg-zinc-200/60 text-zinc-600"
                       }`}
                     >
                       {tab.count}
@@ -150,53 +150,53 @@ export function RecentActivity({
                 description="Submissions from the public website (call bookings, contact requests, and project enquiries) will appear here in chronological order."
               />
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {unifiedActivity.map((item) => {
                   const status = formatStatusBadge(item.status);
                   return (
                     <div
                       key={`${item.type}-${item.id}`}
-                      className="flex flex-col gap-3 rounded-xl border border-zinc-800/80 bg-zinc-950/40 p-4 transition-colors hover:border-zinc-700/80 sm:flex-row sm:items-center sm:justify-between"
+                      className="flex flex-col gap-3 rounded-lg border border-zinc-200/70 bg-zinc-50/40 p-4 transition-colors hover:border-zinc-300 hover:bg-zinc-50 sm:flex-row sm:items-center sm:justify-between"
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300">
+                      <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 shadow-2xs">
                           {item.type === "booking" && (
-                            <CalendarClock className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+                            <CalendarClock className="h-4 w-4 text-emerald-700" aria-hidden="true" />
                           )}
                           {item.type === "contact" && (
-                            <MessageSquare className="h-4 w-4 text-sky-400" aria-hidden="true" />
+                            <MessageSquare className="h-4 w-4 text-sky-600" aria-hidden="true" />
                           )}
                           {item.type === "service" && (
-                            <Briefcase className="h-4 w-4 text-purple-400" aria-hidden="true" />
+                            <Briefcase className="h-4 w-4 text-purple-600" aria-hidden="true" />
                           )}
                         </div>
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="text-xs font-semibold text-white">
+                            <span className="text-xs font-semibold text-zinc-900">
                               {item.contactName}
                             </span>
-                            <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-medium text-zinc-400">
+                            <span className="rounded bg-zinc-100 border border-zinc-200/60 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">
                               {item.typeLabel}
                             </span>
                           </div>
-                          <div className="mt-1 text-xs text-zinc-400 line-clamp-1">
+                          <div className="mt-0.5 text-xs text-zinc-600 line-clamp-1">
                             {item.detail}
                           </div>
-                          <div className="mt-1 flex items-center gap-3 text-[11px] text-zinc-500">
-                            <span>{item.contactEmail}</span>
-                            {item.phone && <span>· {item.phone}</span>}
+                          <div className="mt-1 flex flex-wrap items-center gap-3 text-[11px] text-zinc-400">
+                            <span className="font-mono text-zinc-500">{item.contactEmail}</span>
+                            {item.phone && <span>· <span className="font-mono text-zinc-500">{item.phone}</span></span>}
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between gap-3 sm:flex-col sm:items-end">
+                      <div className="flex items-center justify-between gap-3 shrink-0 sm:flex-col sm:items-end">
                         <span
-                          className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium ${status.badgeClass}`}
+                          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${status.badgeClass}`}
                         >
                           <span className={`h-1.5 w-1.5 rounded-full ${status.dotClass}`} />
                           {status.label}
                         </span>
-                        <span className="text-[11px] text-zinc-500 font-mono">
+                        <span className="text-[11px] text-zinc-400 font-mono">
                           {formatDateTime(item.createdAt)}
                         </span>
                       </div>
@@ -221,29 +221,29 @@ export function RecentActivity({
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px]">
+                  <thead className="border-b border-zinc-200 bg-zinc-50/50 text-zinc-500 uppercase tracking-wider text-[10px]">
                     <tr>
-                      <th className="pb-3 font-semibold">Contact Email</th>
-                      <th className="pb-3 font-semibold">Phone</th>
-                      <th className="pb-3 font-semibold">Requested Schedule</th>
-                      <th className="pb-3 font-semibold">Status</th>
-                      <th className="pb-3 font-semibold text-right">Submitted</th>
+                      <th className="py-2.5 px-3 font-semibold">Contact Email</th>
+                      <th className="py-2.5 px-3 font-semibold">Phone</th>
+                      <th className="py-2.5 px-3 font-semibold">Requested Schedule</th>
+                      <th className="py-2.5 px-3 font-semibold">Status</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">Submitted</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
+                  <tbody className="divide-y divide-zinc-100 text-zinc-700">
                     {recentBookings.data.map((b) => {
                       const status = formatStatusBadge(b.status);
                       return (
-                        <tr key={b.id} className="hover:bg-zinc-800/20">
-                          <td className="py-3.5 pr-4 font-medium text-white">{b.email}</td>
-                          <td className="py-3.5 pr-4 font-mono text-zinc-400">{b.phone}</td>
-                          <td className="py-3.5 pr-4">
-                            <span className="font-semibold text-zinc-200">
+                        <tr key={b.id} className="hover:bg-zinc-50/70 transition-colors">
+                          <td className="py-3 px-3 font-medium text-zinc-900">{b.email}</td>
+                          <td className="py-3 px-3 font-mono text-zinc-500">{b.phone}</td>
+                          <td className="py-3 px-3">
+                            <span className="font-semibold text-zinc-800">
                               {formatDateOnly(b.requested_date)}
                             </span>{" "}
-                            <span className="text-zinc-400">({b.requested_time_slot})</span>
+                            <span className="text-zinc-500">({b.requested_time_slot})</span>
                           </td>
-                          <td className="py-3.5 pr-4">
+                          <td className="py-3 px-3">
                             <span
                               className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium ${status.badgeClass}`}
                             >
@@ -251,7 +251,7 @@ export function RecentActivity({
                               {status.label}
                             </span>
                           </td>
-                          <td className="py-3.5 text-right font-mono text-zinc-500">
+                          <td className="py-3 px-3 text-right font-mono text-zinc-400">
                             {formatDateTime(b.created_at)}
                           </td>
                         </tr>
@@ -277,26 +277,26 @@ export function RecentActivity({
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px]">
+                  <thead className="border-b border-zinc-200 bg-zinc-50/50 text-zinc-500 uppercase tracking-wider text-[10px]">
                     <tr>
-                      <th className="pb-3 font-semibold">Full Name</th>
-                      <th className="pb-3 font-semibold">Email</th>
-                      <th className="pb-3 font-semibold">Subject</th>
-                      <th className="pb-3 font-semibold">Status</th>
-                      <th className="pb-3 font-semibold text-right">Submitted</th>
+                      <th className="py-2.5 px-3 font-semibold">Full Name</th>
+                      <th className="py-2.5 px-3 font-semibold">Email</th>
+                      <th className="py-2.5 px-3 font-semibold">Subject</th>
+                      <th className="py-2.5 px-3 font-semibold">Status</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">Submitted</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
+                  <tbody className="divide-y divide-zinc-100 text-zinc-700">
                     {recentContacts.data.map((c) => {
                       const status = formatStatusBadge(c.status);
                       return (
-                        <tr key={c.id} className="hover:bg-zinc-800/20">
-                          <td className="py-3.5 pr-4 font-medium text-white">{c.full_name}</td>
-                          <td className="py-3.5 pr-4 text-zinc-400">{c.email}</td>
-                          <td className="py-3.5 pr-4 text-zinc-300 max-w-xs truncate">
+                        <tr key={c.id} className="hover:bg-zinc-50/70 transition-colors">
+                          <td className="py-3 px-3 font-medium text-zinc-900">{c.full_name}</td>
+                          <td className="py-3 px-3 text-zinc-500">{c.email}</td>
+                          <td className="py-3 px-3 text-zinc-700 max-w-xs truncate">
                             {c.subject?.trim() || "General Enquiry"}
                           </td>
-                          <td className="py-3.5 pr-4">
+                          <td className="py-3 px-3">
                             <span
                               className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium ${status.badgeClass}`}
                             >
@@ -304,7 +304,7 @@ export function RecentActivity({
                               {status.label}
                             </span>
                           </td>
-                          <td className="py-3.5 text-right font-mono text-zinc-500">
+                          <td className="py-3 px-3 text-right font-mono text-zinc-400">
                             {formatDateTime(c.created_at)}
                           </td>
                         </tr>
@@ -330,30 +330,30 @@ export function RecentActivity({
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px]">
+                  <thead className="border-b border-zinc-200 bg-zinc-50/50 text-zinc-500 uppercase tracking-wider text-[10px]">
                     <tr>
-                      <th className="pb-3 font-semibold">Prospect</th>
-                      <th className="pb-3 font-semibold">Email</th>
-                      <th className="pb-3 font-semibold">Service Category</th>
-                      <th className="pb-3 font-semibold">Budget Tier</th>
-                      <th className="pb-3 font-semibold">Status</th>
-                      <th className="pb-3 font-semibold text-right">Submitted</th>
+                      <th className="py-2.5 px-3 font-semibold">Prospect</th>
+                      <th className="py-2.5 px-3 font-semibold">Email</th>
+                      <th className="py-2.5 px-3 font-semibold">Service Category</th>
+                      <th className="py-2.5 px-3 font-semibold">Budget Tier</th>
+                      <th className="py-2.5 px-3 font-semibold">Status</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">Submitted</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
+                  <tbody className="divide-y divide-zinc-100 text-zinc-700">
                     {recentServices.data.map((s) => {
                       const status = formatStatusBadge(s.status);
                       return (
-                        <tr key={s.id} className="hover:bg-zinc-800/20">
-                          <td className="py-3.5 pr-4 font-medium text-white">{s.full_name}</td>
-                          <td className="py-3.5 pr-4 text-zinc-400">{s.email}</td>
-                          <td className="py-3.5 pr-4 text-zinc-200">
+                        <tr key={s.id} className="hover:bg-zinc-50/70 transition-colors">
+                          <td className="py-3 px-3 font-medium text-zinc-900">{s.full_name}</td>
+                          <td className="py-3 px-3 text-zinc-500">{s.email}</td>
+                          <td className="py-3 px-3 text-zinc-800">
                             {formatServiceCategory(s.service_category)}
                           </td>
-                          <td className="py-3.5 pr-4 text-zinc-400">
+                          <td className="py-3 px-3 text-zinc-500">
                             {formatBudgetTier(s.budget_tier)}
                           </td>
-                          <td className="py-3.5 pr-4">
+                          <td className="py-3 px-3">
                             <span
                               className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium ${status.badgeClass}`}
                             >
@@ -361,7 +361,7 @@ export function RecentActivity({
                               {status.label}
                             </span>
                           </td>
-                          <td className="py-3.5 text-right font-mono text-zinc-500">
+                          <td className="py-3 px-3 text-right font-mono text-zinc-400">
                             {formatDateTime(s.created_at)}
                           </td>
                         </tr>
@@ -387,18 +387,18 @@ export function RecentActivity({
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px]">
+                  <thead className="border-b border-zinc-200 bg-zinc-50/50 text-zinc-500 uppercase tracking-wider text-[10px]">
                     <tr>
-                      <th className="pb-3 font-semibold">Anonymous Session</th>
-                      <th className="pb-3 font-semibold">Version</th>
-                      <th className="pb-3 font-semibold">Essential</th>
-                      <th className="pb-3 font-semibold">Analytics</th>
-                      <th className="pb-3 font-semibold">Marketing</th>
-                      <th className="pb-3 font-semibold">Device</th>
-                      <th className="pb-3 font-semibold text-right">Logged At</th>
+                      <th className="py-2.5 px-3 font-semibold">Anonymous Session</th>
+                      <th className="py-2.5 px-3 font-semibold">Version</th>
+                      <th className="py-2.5 px-3 font-semibold">Essential</th>
+                      <th className="py-2.5 px-3 font-semibold">Analytics</th>
+                      <th className="py-2.5 px-3 font-semibold">Marketing</th>
+                      <th className="py-2.5 px-3 font-semibold">Device</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">Logged At</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800/60 text-zinc-300 font-mono">
+                  <tbody className="divide-y divide-zinc-100 text-zinc-700 font-mono">
                     {recentConsents.data.map((c) => {
                       const maskedSession =
                         c.anonymous_session_id.length > 12
@@ -406,30 +406,30 @@ export function RecentActivity({
                           : c.anonymous_session_id;
 
                       return (
-                        <tr key={c.id} className="hover:bg-zinc-800/20">
-                          <td className="py-3.5 pr-4 text-zinc-300">{maskedSession}</td>
-                          <td className="py-3.5 pr-4 text-zinc-400">v{c.consent_version}</td>
-                          <td className="py-3.5 pr-4">
-                            <span className="text-emerald-400 font-sans font-medium">Active</span>
+                        <tr key={c.id} className="hover:bg-zinc-50/70 transition-colors">
+                          <td className="py-3 px-3 text-zinc-900">{maskedSession}</td>
+                          <td className="py-3 px-3 text-zinc-500">v{c.consent_version}</td>
+                          <td className="py-3 px-3 font-sans">
+                            <span className="text-emerald-700 font-medium">Active</span>
                           </td>
-                          <td className="py-3.5 pr-4">
+                          <td className="py-3 px-3 font-sans">
                             {c.analytics ? (
-                              <span className="text-emerald-400 font-sans font-medium">Granted</span>
+                              <span className="text-emerald-700 font-medium">Granted</span>
                             ) : (
-                              <span className="text-zinc-500 font-sans">Declined</span>
+                              <span className="text-zinc-400">Declined</span>
                             )}
                           </td>
-                          <td className="py-3.5 pr-4">
+                          <td className="py-3 px-3 font-sans">
                             {c.marketing ? (
-                              <span className="text-emerald-400 font-sans font-medium">Granted</span>
+                              <span className="text-emerald-700 font-medium">Granted</span>
                             ) : (
-                              <span className="text-zinc-500 font-sans">Declined</span>
+                              <span className="text-zinc-400">Declined</span>
                             )}
                           </td>
-                          <td className="py-3.5 pr-4 font-sans capitalize text-zinc-300">
+                          <td className="py-3 px-3 font-sans capitalize text-zinc-700">
                             {c.user_agent_category || "Unknown"}
                           </td>
-                          <td className="py-3.5 text-right text-zinc-500">
+                          <td className="py-3 px-3 text-right text-zinc-400">
                             {formatDateTime(c.created_at)}
                           </td>
                         </tr>
@@ -448,11 +448,11 @@ export function RecentActivity({
 
 function EmptyState({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800/80 bg-zinc-950/20 py-12 px-4 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-500 mb-3">
-        <Inbox className="h-6 w-6" aria-hidden="true" />
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50 py-12 px-4 text-center">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-400 mb-3 shadow-2xs">
+        <Inbox className="h-5 w-5" aria-hidden="true" />
       </div>
-      <h3 className="text-sm font-semibold text-zinc-200">{title}</h3>
+      <h3 className="text-sm font-semibold text-zinc-800">{title}</h3>
       <p className="mt-1 max-w-md text-xs text-zinc-500 leading-relaxed">{description}</p>
     </div>
   );
@@ -460,11 +460,11 @@ function EmptyState({ title, description }: { title: string; description: string
 
 function ErrorState({ title, error }: { title: string; error: string }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-950/30 p-4 text-red-300">
-      <AlertCircle className="h-5 w-5 shrink-0 text-red-400 mt-0.5" aria-hidden="true" />
+    <div className="flex items-start gap-3 rounded-lg border border-rose-200 bg-rose-50 p-4 text-rose-800">
+      <AlertCircle className="h-4 w-4 shrink-0 text-rose-600 mt-0.5" aria-hidden="true" />
       <div>
-        <h3 className="text-xs font-semibold text-red-200">{title}</h3>
-        <p className="mt-0.5 text-xs text-red-400/90 font-mono">{error}</p>
+        <h3 className="text-xs font-semibold text-rose-900">{title}</h3>
+        <p className="mt-0.5 text-xs text-rose-700 font-mono">{error}</p>
       </div>
     </div>
   );

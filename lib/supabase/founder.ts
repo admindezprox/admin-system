@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { createClient } from "./server";
@@ -84,6 +85,16 @@ export async function verifyActiveFounder(
 }
 
 /**
+ * Per-request memoized verification helper.
+ * Deduplicates multiple requireActiveFounder calls across Layout and Page in a single request.
+ */
+const getCachedFounderSession = cache(async () => {
+  const supabase = await createClient();
+  const verification = await verifyActiveFounder(supabase);
+  return { supabase, verification };
+});
+
+/**
  * Authoritative guard for Server Components and Layouts.
  *
  * Verifies that the current request is from an authenticated user AND that
@@ -99,8 +110,7 @@ export async function requireActiveFounder(returnTo?: string): Promise<{
   supabase: SupabaseClient<Database>;
   founder: ActiveFounderProfile;
 }> {
-  const supabase = await createClient();
-  const verification = await verifyActiveFounder(supabase);
+  const { supabase, verification } = await getCachedFounderSession();
 
   if (!verification.isAuthenticated) {
     const nextParam = returnTo ? `?next=${encodeURIComponent(returnTo)}` : "";
@@ -145,8 +155,7 @@ export type AssertFounderResult =
  * protected records.
  */
 export async function assertActiveFounder(): Promise<AssertFounderResult> {
-  const supabase = await createClient();
-  const verification = await verifyActiveFounder(supabase);
+  const { supabase, verification } = await getCachedFounderSession();
 
   if (!verification.isAuthenticated) {
     return {

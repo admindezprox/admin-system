@@ -40,7 +40,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
   // Not an active founder (or unauthenticated): present login interface
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-radial from-zinc-900 to-black px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50/80 px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full flex justify-center">
         <LoginForm
           initialNext={getSafeRedirectUrl(rawNext, "/dashboard")}
